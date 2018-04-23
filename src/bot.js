@@ -3,12 +3,15 @@ const config = require('./config')
 
 const bot = new Twit(config)
 
-bot.post('statuses/update', {
-  status: 'hello world!'
+bot.get('followers/list', {
+  screen_name: 'kanyewest',
+  count: 500
 }, (err, data, response) => {
   if (err) {
     console.log(err)
   } else {
-    console.log(`${data.text} tweeted!`)
+    data.users.forEach(user => {
+    	console.log(user.screen_name);
+    })
   }
 })
